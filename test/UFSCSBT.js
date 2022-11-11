@@ -87,13 +87,16 @@ describe('SBTContract', function () {
     });
 
     it('Cant mint a new SoulboundToken with the same tokenId', async function () {
+      let error;
       await sbt.connect(owner).mint('__TOKEN-ID-2__', 'INE0005', user1.address);
 
       try {
         await sbt.connect(owner).mint('__TOKEN-ID-2__', 'INE0005', user2.address);
-      } catch (error) {
-        expect(error.reason).to.equal("Error: VM Exception while processing transaction: reverted with reason string 'There is already a SoulboundToken with given tokenId'")
+      } catch (e) {
+        error = e
       }
+
+      expect(error.reason).to.equal("Error: VM Exception while processing transaction: reverted with reason string 'There is already a SoulboundToken with given tokenId'")
     });
 
     it('Burn a SoulboundToken', async function () {

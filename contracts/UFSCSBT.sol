@@ -52,6 +52,10 @@ contract UFSCSBT {
       return false;
    }
 
+   function getOperator(address _address) public view returns (string[] memory) {
+      return enabledOperators[_address];
+   }
+
    function ownerOf(string memory tokenId) public view returns (address) {
       return soulboundTokens[tokenId].receiver;
    }
@@ -70,10 +74,6 @@ contract UFSCSBT {
 
       delete soulboundTokens[_tokenId];
       emit Burn(_tokenId);
-   }
-
-   function getOperator(address _address) public view returns (string[] memory) {
-      return enabledOperators[_address];
    }
 
    function enableOperator(address _address, string memory _tokenReference) external {
@@ -102,46 +102,4 @@ contract UFSCSBT {
 
       emit DisabledOperator(_address, _tokenReference);
    }
-
-   // function listSouls() public view returns (Soul[] memory){
-   //    Soul[] memory _souls = new Soul[](soulsCount);
-   //    for (uint256 i = 0; i < soulsCount; i++) {
-   //       Soul storage s = souls[i];
-   //       _souls[i] = s;
-   //    }
-
-   //    return _souls;
-   // }
-
-   // function createSoul(string memory _description, string memory _url) public {
-   //    require(msg.sender == creator, "Only creator can create a soul");
-   //    souls[soulsCount] = Soul(soulsCount, _description, msg.sender, _url, block.timestamp);
-   //    soulsCount++;
-   // }
-
-   // function getSoul(uint256 _soulId) public view returns (Soul memory) {
-   //    return souls[_soulId];
-   // }
-
-   // function removeSoul(uint256 _soulId) public {
-   //    Soul memory _soul = souls[_soulId];
-   //    require(msg.sender == _soul.caller, "Only the creator have rights to delete their soul");
-   //    delete souls[_soulId];
-   // }
-
-   // function createSoulboundToken(uint256 _soulId, string memory _identity, address _address) public {
-   //    Soul memory soul = getSoul(_soulId);
-   //    // require(soul.caller == "", "There is no Soul with this ID");
-   //    soulTokens[_address].push(SoulToken(_identity, msg.sender, block.timestamp, soul));
-   // }
-
-   // function listSoulboundTokens(address _address) public view returns (SoulToken[] memory){
-   //    return soulTokens[_address];
-   // }
-
-   // function enableOperator(address _address, uint256 _soulId) public  {
-   //    require(msg.sender == creator, "Only creator can enable an operator");
-   //    Soul memory _soul = souls[_soulId];
-   //    enabledOperators[_address].push(_soul);
-   // }
 }
