@@ -107,4 +107,8 @@ describe('SBTContract', function () {
     expect(token2[0]).to.equal('INE0001')
     expect(token3[0]).to.equal('INE0002')
   });
+
+  it('Enable user3 as operator', async function () {
+    await sbt.enableOperator(user3.address, )
+  });
 });

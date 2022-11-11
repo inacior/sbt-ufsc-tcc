@@ -19,10 +19,11 @@ contract SBTContract {
 
    mapping(uint256 => Soul) souls;
    mapping(address => SoulToken[]) soulTokens;
+   mapping(address => Soul[]) enabledOperators;
    uint256 public soulsCount;
    uint256 public soulTokensCount;
 
-   address public operator;
+   address public creator;
    string public name;
    string public id;
 
@@ -31,7 +32,7 @@ contract SBTContract {
       soulTokensCount = 0;
       name = _name;
       id = _id;
-      operator = msg.sender;
+      creator = msg.sender;
    }
 
    function listSouls() public view returns (Soul[] memory){
@@ -44,8 +45,8 @@ contract SBTContract {
       return _souls;
    }
 
-   function createSoul(string memory _description, string memory _url) public  {
-      require(msg.sender == operator, "Only operator can create a soul");
+   function createSoul(string memory _description, string memory _url) public {
+      require(msg.sender == creator, "Only creator can create a soul");
       souls[soulsCount] = Soul(soulsCount, _description, msg.sender, _url, block.timestamp);
       soulsCount++;
    }
@@ -68,5 +69,11 @@ contract SBTContract {
 
    function listSoulboundTokens(address _address) public view returns (SoulToken[] memory){
       return soulTokens[_address];
+   }
+
+   function enableOperator(address _address, uint256 _soulId) public  {
+      require(msg.sender == creator, "Only creator can enable an operator");
+      Soul memory _soul = souls[_soulId];
+      enabledOperators[_address].push(_soul);
    }
 }
