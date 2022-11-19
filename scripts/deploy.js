@@ -1,8 +1,8 @@
 async function main() {
-    const Contract = await ethers.getContractFactory("SBTContract");
+    const Contract = await ethers.getContractFactory("UFSCSBT");
 
     // Start deployment, returning a promise that resolves to a contract object
-    const contract_deployer = await Contract.deploy("Test SBT", "TESTSBT");
+    const contract_deployer = await Contract.deploy("UFSC SBT Token", "UFSCSBT");
     console.log("Contract deployed to address:", contract_deployer.address);
  }
 
