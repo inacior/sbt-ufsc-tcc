@@ -1,0 +1,67 @@
+.container {
+  padding: 0 2rem;
+}
+
+.main {
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+  min-height: 100vh;
+  padding: 4rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  color: black;
+  background-color: #eaeaea;
+  margin: 1rem;
+  padding: 1.5rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 500px;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.button:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.authed {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.wallet {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+
+.backButton {
+  text-decoration: underline;
+  cursor: pointer;
+  margin-bottom: 0.5em;
+  font-weight: 400;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex1 {
+  flex: 1
+}
+
+.tokensList {
+  margin-top: 1em;
+}

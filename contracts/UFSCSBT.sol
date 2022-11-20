@@ -2,10 +2,10 @@
 pragma solidity ^0.8.13;
 
 contract UFSCSBT {
-   event Mint(string _tokenId, string _tokenReference, address _receiver);
-   event Burn(string _tokenId);
-   event EnabledOperator(address _address, string _tokenReference);
-   event DisabledOperator(address _address, string _tokenReference);
+   event Mint(string indexed _tokenId, string indexed _tokenReference, address indexed _receiver);
+   event Burn(string indexed _tokenId);
+   event EnabledOperator(address indexed _address, string indexed _tokenReference);
+   event DisabledOperator(address indexed _address, string indexed _tokenReference);
 
    struct SoulboundToken {
       string tokenId;
