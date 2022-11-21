@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "alchemy-sdk": "^2.1.1",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "json2csv": "^5.0.7",
+    "uuid": "^9.0.0"
   }
 }

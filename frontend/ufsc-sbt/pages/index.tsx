@@ -14,7 +14,7 @@ type SBTToken = {
   creator: string
 }
 
-const INITIAL_BLOCK = 29232966
+const INITIAL_BLOCK = 35885937
 
 export default function Home() {
   const [screen, setScreen] = useState<'INITIAL' | 'TOKENS_LIST' | 'VERIFY_ADDRESS'>('INITIAL')
@@ -35,10 +35,10 @@ export default function Home() {
 
   const handleConnect = async () => {
     // @ts-ignore
-    const provider = new ethers.providers.Web3Provider(window.ethereum, 80001)
+    const provider = new ethers.providers.Web3Provider(window.ethereum, 137)
     await provider.send("eth_requestAccounts", []);
     const _signer = provider.getSigner()
-    const _contract = new ethers.Contract( '0x2505560418052e8859D6Aa7b5Cb877E2F8F6e694' , contractABI.abi , _signer )
+    const _contract = new ethers.Contract( '0x08b694591e845ea2700eb0f058f65c04d2eefa0f' , contractABI.abi , _signer )
 
     setSigner(_signer)
     setContract(_contract)
@@ -59,8 +59,11 @@ export default function Home() {
     for (let index = 0; index < Math.floor((latestBlock.number - INITIAL_BLOCK)/1000) + 1; index++) {
      const blockFrom = INITIAL_BLOCK + (1000 * index);
      const blockTo = (blockFrom + 1000) > latestBlock.number ? latestBlock.number : blockFrom + 1000;
+     const _events = await contract.queryFilter(contract.filters.Mint(null, null, addressToSearch), blockFrom, blockTo)
 
-     chain.push(contract.queryFilter(contract.filters.Mint(null, null, addressToSearch), blockFrom, blockTo))
+     console.log(_events)
+
+     chain.push(_events)
     }
 
     await Promise.all(chain)
@@ -121,7 +124,7 @@ export default function Home() {
             <td>{t.tokenReference}</td>
             <td>{t.blockNumber}</td>
             <td>{t.creator}</td>
-            <td><a href={`https://mumbai.polygonscan.com/tx/${t.transactionId}`} target="none">TX</a></td>
+            <td><a href={`https://polygonscan.com/tx/${t.transactionId}`} target="none">TX</a></td>
           </tr>
         ))}
       </table>
